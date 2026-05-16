@@ -26,7 +26,7 @@ Receives the CDC event stream from Debezium. Downstream consumers (unknown at th
 |-----------|-------|
 | Platform | Confluent (managed Kafka) |
 | Topics | _To be confirmed_ |
-| Consumers | _To be confirmed_ |
+| Consumers | Data platform (raw area) — see [data-platform.md](data-platform.md) |
 
 ## Data flow
 
@@ -39,7 +39,7 @@ flowchart LR
     subgraph Confluent
         kafka[[Kafka Topics\nCRM CDC events]]
     end
-    consumers[Downstream Consumers\nTBC]
+    consumers[Data Platform\nsee data-platform.md]
 
     pg -->|WAL / CDC| debezium
     debezium -->|change events - real time| kafka
