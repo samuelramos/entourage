@@ -12,6 +12,7 @@ CoLaCo uses Confluent Schema Registry to enforce and version message schemas acr
 |-----------|-------|
 | Platform | Confluent Schema Registry (managed) |
 | Serialization format | Avro only |
+| Compatibility mode | FULL_TRANSITIVE |
 | Producers | Debezium (CDC events) — see [debezium.md](debezium.md) |
 | Consumers | Data platform — see [data-platform.md](data-platform.md) |
 | Owners | _To be confirmed_ |
@@ -36,5 +37,4 @@ flowchart LR
 ## Open questions
 
 - Who owns and operates the Schema Registry?
-- What compatibility mode is configured (BACKWARD, FULL, NONE, etc.)?
-- How are schema evolution and breaking changes managed?
+- How are schema evolution and breaking changes managed operationally (review process, tooling)?
