@@ -2,7 +2,7 @@
 
 This document captures CoLaCo's current IT architecture as discovered to date, intended as reference material for onboarding, decisions, and system understanding.
 
-> **Scope**: documentation covers the CRM data flows only (confirmed with IT director).
+> **Scope (final)**: this architecture documentation is permanently restricted to CRM data flows. All other data marts and upstream sources are out of scope. Decision driven by cost constraints — confirmed by IT director.
 
 ## Overall Architecture
 
