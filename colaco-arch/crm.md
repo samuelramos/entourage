@@ -12,28 +12,11 @@ CoLaCo's CRM domain manages customer contact data. The primary store is a cloud-
 |-----------|-------|
 | Provider | Azure Database for PostgreSQL |
 | Primary use | CRM contact records |
-| Owners | _To be confirmed_ |
+| Owners | CRM Team |
 
-## Integrations
+## Data model
 
-| System | Role | Doc |
-|--------|------|-----|
-| Debezium | Captures WAL changes from PostgreSQL and publishes to Kafka | [debezium.md](debezium.md) |
-| Confluent Kafka | Event streaming backbone receiving CDC events | [confluent-kafka.md](confluent-kafka.md) |
-
-## Data flow
-
-```mermaid
-flowchart LR
-    subgraph Azure
-        pg[(PostgreSQL\nCRM Contacts)]
-    end
-    debezium[Debezium\nsee debezium.md]
-    kafka[[Confluent Kafka\nsee confluent-kafka.md]]
-
-    pg -->|WAL / CDC| debezium
-    debezium -->|change events - real time| kafka
-```
+TODO
 
 ## Open questions
 

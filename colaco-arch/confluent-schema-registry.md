@@ -15,7 +15,7 @@ CoLaCo uses Confluent Schema Registry to enforce and version message schemas acr
 | Compatibility mode | FULL_TRANSITIVE |
 | Producers | Debezium (CDC events) — see [debezium.md](debezium.md) |
 | Consumers | Data platform — see [data-platform.md](data-platform.md) |
-| Owners | _To be confirmed_ |
+| Owners | Confluent Kafka Team |
 
 ## Data flow
 
@@ -36,5 +36,4 @@ flowchart LR
 
 ## Open questions
 
-- Who owns and operates the Schema Registry?
 - How are schema evolution and breaking changes managed operationally (review process, tooling)?

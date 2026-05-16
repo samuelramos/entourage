@@ -14,7 +14,7 @@ ADLS Gen2 is the primary storage layer for all data platform layers in productio
 |-----------|-------|
 | Service | Azure Data Lake Storage Gen2 |
 | Role | Primary storage for all layers (raw, bronze, gold) |
-| Owners | _To be confirmed_ |
+| Owners | Data Platform Team |
 
 ## Processing
 
@@ -25,11 +25,13 @@ Databricks is the compute and processing layer for the data platform.
 | Attribute | Value |
 |-----------|-------|
 | Role | Data processing across raw, bronze, and gold layers |
-| Owners | _To be confirmed_ |
+| Owners | Data Platform Team |
 
 ## Layers
 
 ### Raw
+
+> **Scope note**: current documentation effort covers CRM data flows only.
 
 Landing zone for incoming Kafka events. Data is written to ADLS Gen2 with no transformation — preserving the original Avro event payload exactly as received.
 
@@ -39,7 +41,7 @@ Landing zone for incoming Kafka events. Data is written to ADLS Gen2 with no tra
 | Storage | ADLS Gen2 |
 | Sources | Confluent Kafka — see [confluent-kafka.md](confluent-kafka.md) |
 | Transformation | None |
-| Owners | _To be confirmed_ |
+| Owners | Data Platform Team |
 
 ### Bronze
 
@@ -51,7 +53,7 @@ Holds cleaned or validated data derived from the raw layer.
 | Storage | ADLS Gen2 |
 | Sources | Raw layer |
 | Transformation | _To be confirmed_ |
-| Owners | _To be confirmed_ |
+| Owners | Data Platform Team |
 
 ### Gold
 
@@ -63,7 +65,7 @@ Holds the Data Warehouse and domain-specific Data Marts. The Data Warehouse is t
 | Storage | ADLS Gen2 |
 | Sources | Bronze layer |
 | Transformation | Aggregation and modelling into Data Warehouse and Data Marts |
-| Owners | _To be confirmed_ |
+| Owners | Analytics Team |
 
 #### Gold structure
 
@@ -73,7 +75,7 @@ Bronze → Data Warehouse → Data Marts → Apache Superset (direct SQL)
 
 #### Data Marts (in scope: CRM)
 
-> **Scope note**: per IT director, current documentation effort covers CRM data flows only.
+> **Scope note**: current documentation effort covers CRM data flows only.
 
 | Mart | Domain | Known reports |
 |------|--------|---------------|
@@ -111,7 +113,5 @@ In local development, ADLS Gen2 is replaced by **MinIO** — an S3-compatible ob
 
 ## Open questions
 
-- Who owns and operates the data platform?
-- What Kafka topics beyond CRM CDC feed into the raw layer (out of current scope)?
 - What is the Bronze transformation logic?
 - How is schema evolution handled across Delta layers?

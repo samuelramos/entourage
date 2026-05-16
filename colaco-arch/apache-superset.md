@@ -11,15 +11,17 @@ Apache Superset is CoLaCo's analytical reporting platform. It connects to the da
 | Role | BI and analytical reporting |
 | Data source | Data Marts (gold layer) — see [data-platform.md](data-platform.md) |
 | Connection method | Direct SQL |
-| Owners | _To be confirmed_ |
+| Owners | Analytics Team |
 
 ## Known reports
 
-| Report | Data mart | Description |
-|--------|-----------|-------------|
-| Customer Churn | CRM | _To be confirmed_ |
+| Report | Data mart | Owner | Description |
+|--------|-----------|-------|-------------|
+| Customer Churn | CRM | CRM | The rate at which customers stop subscribing to or purchasing a company’s products/services, indicating a loss in revenue and customer base |
 
 ## Data flow
+
+> **Scope note**: current documentation effort covers CRM data flows only.
 
 ```mermaid
 flowchart LR

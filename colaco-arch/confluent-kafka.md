@@ -11,13 +11,15 @@ CoLaCo uses a managed Confluent Kafka cluster as the central event streaming bac
 | Attribute | Value |
 |-----------|-------|
 | Platform | Confluent (managed Kafka) |
-| Topic naming (CDC) | `cdc.<source-system-name>.<source-table-name>` |
+| Topic naming (CDC) | `cdc.<source-system-name>.<schema>.<source-table-name>` |
 | Schema Registry | Confluent Schema Registry, Avro only — see [confluent-schema-registry.md](confluent-schema-registry.md) |
 | Producers | Debezium — see [debezium.md](debezium.md) |
 | Consumers | Data platform (raw area) — see [data-platform.md](data-platform.md) |
-| Owners | _To be confirmed_ |
+| Owners | Confluent Kafka Team |
 
 ## Data flow
+
+> **Scope note**: current documentation effort covers CRM data flows only.
 
 ```mermaid
 flowchart LR
