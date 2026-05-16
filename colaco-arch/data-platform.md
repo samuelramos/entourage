@@ -54,15 +54,21 @@ _To be confirmed_ — expected to hold cleaned or validated data derived from th
 
 ### Gold
 
-_To be confirmed_ — expected to hold aggregated or business-ready data derived from the bronze layer.
+Holds the data warehouse and domain-specific data marts derived from the bronze layer. Apache Superset connects to this layer to serve analytical reports — see [apache-superset.md](apache-superset.md).
 
 | Attribute | Value |
 |-----------|-------|
 | Table format | _To be confirmed_ |
 | Storage | Azure storage |
 | Sources | Bronze layer |
-| Transformation | _To be confirmed_ |
+| Transformation | Aggregation and modelling into warehouse and data marts |
 | Owners | _To be confirmed_ |
+
+#### Data marts
+
+| Mart | Domain | Known reports |
+|------|--------|---------------|
+| CRM | CRM contact and customer data | Customer Churn |
 
 ## Data flow
 
@@ -74,11 +80,13 @@ flowchart LR
     subgraph "Data Platform (Azure + Databricks)"
         raw[Raw\nlanding zone]
         bronze[Bronze\ncleaned]
-        gold[Gold\nbusiness-ready]
+        gold[Gold\nwarehouse & marts]
         raw --> bronze --> gold
     end
+    superset[[Apache Superset]]
 
     kafka -->|event stream| raw
+    gold -->|query| superset
 ```
 
 ## Development Environment
@@ -98,7 +106,8 @@ In local development, Azure storage is replaced by **MinIO** — an S3-compatibl
 - What specific Azure storage service is used (ADLS Gen2, Blob Storage)?
 - What other Kafka topics (beyond CRM) feed into the raw layer?
 - What is the Bronze transformation logic?
-- What is the Gold aggregation / serving model?
 - What table format is used in production?
 - How is schema evolution handled across layers?
 - Will Iceberg be adopted — and if so, in which layer first?
+- What other data marts exist beyond CRM?
+- How does Apache Superset connect to the gold layer (direct SQL, semantic layer)?
