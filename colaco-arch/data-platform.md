@@ -2,28 +2,55 @@
 
 ## Overview
 
-CoLaCo's data platform ingests event streams from Confluent Kafka and persists them in a raw storage layer built on MinIO using the Apache Iceberg table format.
+CoLaCo's data platform ingests event streams from Confluent Kafka and processes them through three layers — raw, bronze, and gold — stored on MinIO using Apache Iceberg tables.
 
-## Components
+## Storage
 
 ### MinIO
 
-Object storage layer that backs the data platform.
+Object storage layer that backs all three data platform layers.
 
 | Attribute | Value |
 |-----------|-------|
 | Role | Primary storage for the data platform |
 | Owners | _To be confirmed_ |
 
-### Raw Area (Iceberg)
+## Layers
 
-The raw area is the landing zone for incoming events. Data is persisted as Apache Iceberg tables on top of MinIO, preserving the original event payload without transformation.
+### Raw
+
+Landing zone for incoming Kafka events. Data is written as Apache Iceberg tables on MinIO with no transformation — preserving the original event payload exactly as received.
 
 | Attribute | Value |
 |-----------|-------|
 | Table format | Apache Iceberg |
 | Storage | MinIO |
-| Sources | Confluent Kafka (CRM CDC events; others TBC) |
+| Sources | Confluent Kafka — see [confluent-kafka.md](confluent-kafka.md) |
+| Transformation | None |
+| Owners | _To be confirmed_ |
+
+### Bronze
+
+_To be confirmed_ — expected to hold cleaned or validated data derived from the raw layer.
+
+| Attribute | Value |
+|-----------|-------|
+| Table format | _To be confirmed_ |
+| Storage | MinIO |
+| Sources | Raw layer |
+| Transformation | _To be confirmed_ |
+| Owners | _To be confirmed_ |
+
+### Gold
+
+_To be confirmed_ — expected to hold aggregated or business-ready data derived from the bronze layer.
+
+| Attribute | Value |
+|-----------|-------|
+| Table format | _To be confirmed_ |
+| Storage | MinIO |
+| Sources | Bronze layer |
+| Transformation | _To be confirmed_ |
 | Owners | _To be confirmed_ |
 
 ## Data flow
@@ -33,10 +60,11 @@ flowchart LR
     subgraph Confluent
         kafka[[Kafka Topics]]
     end
-    subgraph "Data Platform"
-        raw["Raw Area\n(Iceberg tables)"]
-        minio[(MinIO)]
-        raw -->|stored on| minio
+    subgraph "Data Platform (MinIO + Iceberg)"
+        raw[Raw\nlanding zone]
+        bronze[Bronze\ncleaned]
+        gold[Gold\nbusiness-ready]
+        raw --> bronze --> gold
     end
 
     kafka -->|event stream| raw
@@ -45,7 +73,8 @@ flowchart LR
 ## Open questions
 
 - Who owns and operates the data platform?
-- What other Kafka topics (beyond CRM) feed into the raw area?
-- Are there additional layers beyond raw (e.g., curated, serving)?
-- What tooling reads from the Iceberg tables (query engine, BI tool)?
-- How is schema evolution handled in the Iceberg tables?
+- What other Kafka topics (beyond CRM) feed into the raw layer?
+- What is the Bronze transformation logic?
+- What is the Gold aggregation / serving model?
+- What query engine reads from the Iceberg tables (e.g., Trino, Spark, Dremio)?
+- How is schema evolution handled across layers?

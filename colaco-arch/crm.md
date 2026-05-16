@@ -2,7 +2,7 @@
 
 ## Overview
 
-CoLaCo's CRM domain manages customer contact data. The primary store is a cloud-managed PostgreSQL instance on Azure. Changes to that database are streamed in real time to a Confluent Kafka cluster via Debezium CDC.
+CoLaCo's CRM domain manages customer contact data. The primary store is a cloud-managed PostgreSQL instance on Azure. Changes to that database are streamed in real time via Debezium CDC into Confluent Kafka.
 
 ## Components
 
@@ -14,19 +14,12 @@ CoLaCo's CRM domain manages customer contact data. The primary store is a cloud-
 | Primary use | CRM contact records |
 | Owners | _To be confirmed_ |
 
-### Debezium
+## Integrations
 
-Debezium is deployed as a Kafka Connect connector. It tails the PostgreSQL WAL (write-ahead log) and publishes row-level change events (insert / update / delete) to Confluent Kafka topics in real time.
-
-### Confluent Kafka
-
-Receives the CDC event stream from Debezium. Downstream consumers (unknown at this time) read from these topics.
-
-| Attribute | Value |
-|-----------|-------|
-| Platform | Confluent (managed Kafka) |
-| Topics | _To be confirmed_ |
-| Consumers | Data platform (raw area) — see [data-platform.md](data-platform.md) |
+| System | Role | Doc |
+|--------|------|-----|
+| Debezium | Captures WAL changes from PostgreSQL and publishes to Kafka | [debezium.md](debezium.md) |
+| Confluent Kafka | Event streaming backbone receiving CDC events | [confluent-kafka.md](confluent-kafka.md) |
 
 ## Data flow
 
@@ -35,20 +28,14 @@ flowchart LR
     subgraph Azure
         pg[(PostgreSQL\nCRM Contacts)]
     end
-    debezium[Debezium\nKafka Connect]
-    subgraph Confluent
-        kafka[[Kafka Topics\nCRM CDC events]]
-    end
-    consumers[Data Platform\nsee data-platform.md]
+    debezium[Debezium\nsee debezium.md]
+    kafka[[Confluent Kafka\nsee confluent-kafka.md]]
 
     pg -->|WAL / CDC| debezium
     debezium -->|change events - real time| kafka
-    kafka --> consumers
 ```
 
 ## Open questions
 
-- Who owns / operates the PostgreSQL instance and the Debezium connector?
-- What Kafka topics are used for CRM events?
-- What downstream services consume those topics?
-- Is there a schema registry in use with Confluent?
+- Who owns / operates the PostgreSQL instance?
+- What Kafka topics carry CRM events?

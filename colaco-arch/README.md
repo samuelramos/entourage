@@ -17,6 +17,8 @@ This repository captures CoLaCo's IT architecture as structured, version-control
 | Domain | File | Status |
 |--------|------|--------|
 | CRM | [crm.md](crm.md) | Draft — open questions remain |
+| Debezium | [debezium.md](debezium.md) | Draft — open questions remain |
+| Confluent Kafka | [confluent-kafka.md](confluent-kafka.md) | Draft — open questions remain |
 | Data Platform | [data-platform.md](data-platform.md) | Draft — open questions remain |
 
 ## Notes
