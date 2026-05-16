@@ -48,9 +48,7 @@ flowchart LR
 | System | File | Role | Status |
 |--------|------|------|--------|
 | CRM | [crm.md](crm.md) | System of record for customer data (PostgreSQL on Azure) | Draft |
-| Debezium | [debezium.md](debezium.md) | Confluent CDC connector — streams CRM WAL changes to Kafka as Avro | Draft |
-| Confluent Kafka | [confluent-kafka.md](confluent-kafka.md) | Managed event streaming backbone; CDC topics follow `cdc.<source>.<table>` | Draft |
-| Confluent Schema Registry | [confluent-schema-registry.md](confluent-schema-registry.md) | Avro schema enforcement; FULL_TRANSITIVE compatibility | Draft |
+| Confluent Kafka | [confluent-kafka.md](confluent-kafka.md) | Confluent platform: Debezium CDC connector + Kafka cluster + Schema Registry (Avro, FULL_TRANSITIVE) | Draft |
 | Data Platform | [data-platform.md](data-platform.md) | ADLS Gen2 + Databricks; Delta throughout; Raw → Bronze → DW → Data Marts | Draft |
 | Apache Superset | [apache-superset.md](apache-superset.md) | BI reporting; queries CRM Data Mart via direct SQL | Draft |
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-CoLaCo's CRM domain manages customer contact data. The primary store is a cloud-managed PostgreSQL instance on Azure. Changes to that database are streamed in real time via Debezium CDC into Confluent Kafka.
+CoLaCo's CRM domain manages customer contact data. The primary store is a cloud-managed PostgreSQL instance on Azure. Changes to that database are streamed in real time via the Debezium CDC connector into Confluent Kafka — see [confluent-kafka.md](confluent-kafka.md).
 
 ## Components
 
