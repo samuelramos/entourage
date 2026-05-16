@@ -10,9 +10,11 @@ Debezium is CoLaCo's Change Data Capture (CDC) layer. It runs as a Kafka Connect
 
 | Attribute | Value |
 |-----------|-------|
-| Deployment | _To be confirmed_ |
+| Deployment | Confluent Cloud connector |
 | Source databases | CRM PostgreSQL (Azure) — see [crm.md](crm.md) |
-| Sink | Confluent Kafka — see [kafka.md](kafka.md) |
+| Sink | Confluent Kafka — see [confluent-kafka.md](confluent-kafka.md) |
+| Serialization | Avro (via Confluent Schema Registry — see [confluent-schema-registry.md](confluent-schema-registry.md)) |
+| Topic naming | `cdc.<source-system-name>.<source-table-name>` |
 | Owners | _To be confirmed_ |
 
 ## Data flow
@@ -33,7 +35,6 @@ flowchart LR
 
 ## Open questions
 
-- Where is Debezium deployed (self-hosted, Confluent Cloud connector, other)?
 - Who owns and operates the Debezium connector?
 - Are there other source databases beyond CRM PostgreSQL?
-- What is the connector configuration (snapshot mode, topic naming, serialization format)?
+- What snapshot mode is configured?

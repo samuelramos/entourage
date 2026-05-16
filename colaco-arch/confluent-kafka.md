@@ -11,7 +11,8 @@ CoLaCo uses a managed Confluent Kafka cluster as the central event streaming bac
 | Attribute | Value |
 |-----------|-------|
 | Platform | Confluent (managed Kafka) |
-| Topics | _To be confirmed_ |
+| Topic naming (CDC) | `cdc.<source-system-name>.<source-table-name>` |
+| Schema Registry | Confluent Schema Registry, Avro only — see [confluent-schema-registry.md](confluent-schema-registry.md) |
 | Producers | Debezium — see [debezium.md](debezium.md) |
 | Consumers | Data platform (raw area) — see [data-platform.md](data-platform.md) |
 | Owners | _To be confirmed_ |
@@ -32,8 +33,6 @@ flowchart LR
 
 ## Open questions
 
-- What are the topic names and naming conventions?
-- Is a Schema Registry in use? If so, what serialization format (Avro, Protobuf, JSON Schema)?
 - What retention policies are configured?
 - Are there consumers beyond the data platform?
 - Who owns and operates the Confluent cluster?
