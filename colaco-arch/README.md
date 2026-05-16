@@ -18,13 +18,7 @@ This repository captures CoLaCo's IT architecture as structured, version-control
 |--------|------|--------|
 | CRM | [crm.md](crm.md) | Draft — open questions remain |
 
-## Diagrams
-
-| Diagram | File | Description |
-|---------|------|-------------|
-| CRM data flow | [diagrams/crm-data-flow.puml](diagrams/crm-data-flow.puml) | PostgreSQL → Debezium → Confluent Kafka |
-
 ## Notes
 
 - Owners for several components are still being identified (marked _To be confirmed_).
-- PlantUML is used for all diagrams.
+- Diagrams are embedded inline using Mermaid.

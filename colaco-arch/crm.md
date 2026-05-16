@@ -30,12 +30,20 @@ Receives the CDC event stream from Debezium. Downstream consumers (unknown at th
 
 ## Data flow
 
-See [`diagrams/crm-data-flow.puml`](diagrams/crm-data-flow.puml).
+```mermaid
+flowchart LR
+    subgraph Azure
+        pg[(PostgreSQL\nCRM Contacts)]
+    end
+    debezium[Debezium\nKafka Connect]
+    subgraph Confluent
+        kafka[[Kafka Topics\nCRM CDC events]]
+    end
+    consumers[Downstream Consumers\nTBC]
 
-```plantuml
-@startuml crm-data-flow
-!include diagrams/crm-data-flow.puml
-@enduml
+    pg -->|WAL / CDC| debezium
+    debezium -->|change events - real time| kafka
+    kafka --> consumers
 ```
 
 ## Open questions
